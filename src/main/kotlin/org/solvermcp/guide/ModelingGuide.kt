@@ -4,7 +4,7 @@ object ModelingGuide {
     val text: String = """
 # solver-mcp modeling guide
 
-v0.1 supports the ASSIGNMENT archetype: each entity is assigned one value. See `spec-schema.json` in the repository for the JSON Schema. Workflow: validate_spec -> solve -> explain_solution. If solve returns HARD_INFEASIBLE, call diagnose_infeasible, repair the declarative spec, and validate again. Timefold returns the best solution found within the time limit, not a proven optimum.
+v1.0 supports the ASSIGNMENT archetype: each entity is assigned one value. See `spec-schema.json` in the repository for the JSON Schema. Workflow: validate_spec -> solve -> explain_solution. If solve returns HARD_INFEASIBLE, call diagnose_infeasible, repair the declarative spec, and validate again. Timefold returns the best solution found within the time limit, not a proven optimum.
 
 Canonical spec shape:
 ```json

@@ -97,7 +97,7 @@ Docker alternative:
 
 ## Spec
 
-The v0.1 schema is published at [spec-schema.json](spec-schema.json). The current archetype is `ASSIGNMENT`: every entity gets one value from the values list.
+The v1.0 schema is published at [spec-schema.json](spec-schema.json). The current archetype is `ASSIGNMENT`: every entity gets one value from the values list.
 
 ```json
 {
@@ -176,7 +176,7 @@ The `ConstraintProvider` contains always-present streams for every primitive and
 
 ## Limitations
 
-- v0.1 supports ASSIGNMENT only. SEQUENCE is planned for v0.2.
+- v1.0 supports ASSIGNMENT only. SEQUENCE is planned for a future release.
 - Timefold returns the best-found solution within the time limit unless configured otherwise; this project does not prove optimality.
 - The expression language is intentionally small and bounded.
 - The generic constraint streams are flexible, not a replacement for a hand-tuned domain solver on large production instances.

@@ -1,7 +1,7 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "urn:solver-mcp:spec-schema:v0.1",
-  "title": "solver-mcp v0.1 Problem Spec",
+  "$id": "urn:solver-mcp:spec-schema:v1.0",
+  "title": "solver-mcp v1.0 Problem Spec",
   "type": "object",
   "required": ["name", "archetype", "entities", "values", "constraints"],
   "additionalProperties": false,

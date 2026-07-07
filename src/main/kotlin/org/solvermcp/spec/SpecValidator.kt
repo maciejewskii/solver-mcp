@@ -41,7 +41,7 @@ object SpecValidator {
         }
         if (constraint.weight < 1) errors += error("$path.weight", "invalid_weight", "Weight must be positive", "Use weight >= 1; HARD constraints usually omit weight.")
         if (constraint.type in setOf("balance", "objective") && constraint.level != ScoreLevel.SOFT) {
-            errors += error("$path.level", "invalid_level", "${constraint.type} must be SOFT in v0.1", "Set level to SOFT.")
+            errors += error("$path.level", "invalid_level", "${constraint.type} must be SOFT in v1.0", "Set level to SOFT.")
         }
         when (constraint.type) {
             "require", "forbid" -> requireField(path, "when", constraint.whenExpr, errors)

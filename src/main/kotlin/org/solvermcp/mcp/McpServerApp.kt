@@ -51,7 +51,7 @@ class McpServerApp {
         }
         server.addTool(
             name = "validate_spec",
-            description = "Validate a solver-mcp problem spec against the v0.1 ASSIGNMENT DSL.",
+            description = "Validate a solver-mcp problem spec against the v1.0 ASSIGNMENT DSL.",
             inputSchema = toolSchema("spec" to specSchema())
         ) { request ->
             safe { result(service.validate(arg(request.arguments, "spec"))) }
