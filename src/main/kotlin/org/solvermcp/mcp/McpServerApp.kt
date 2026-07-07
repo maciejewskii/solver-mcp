@@ -1,5 +1,6 @@
 package org.solvermcp.mcp
 
+import io.github.oshai.kotlinlogging.KotlinLoggingConfiguration
 import io.modelcontextprotocol.kotlin.sdk.server.Server
 import io.modelcontextprotocol.kotlin.sdk.server.ServerOptions
 import io.modelcontextprotocol.kotlin.sdk.server.StdioServerTransport
@@ -31,6 +32,7 @@ class McpServerApp {
 
     fun start(): Nothing = runBlocking {
         System.setProperty("slf4j.internal.verbosity", "WARN")
+        KotlinLoggingConfiguration.logStartupMessage = false
         val server = Server(
             serverInfo = Implementation(name = "solver-mcp", version = "0.1.0"),
             options = ServerOptions(

@@ -25,12 +25,27 @@ java -jar build/libs/solver-mcp-0.1.0-all.jar
 
 For MCP clients, use the jar command above. Do not launch the MCP server through `./gradlew run`; Gradle writes progress output to stdout, and stdio MCP requires stdout to contain protocol frames only.
 
+Or build and run the Docker image:
+
+```bash
+docker build -t solver-mcp:0.1.0 .
+docker run -i --rm solver-mcp:0.1.0
+```
+
+Docker MCP clients must keep stdin open with `-i`; the server speaks MCP over stdio.
+
 ## Claude Code
 
 From this repository:
 
 ```bash
 claude mcp add solver-mcp -- java -jar /absolute/path/to/solver-mcp/build/libs/solver-mcp-0.1.0-all.jar
+```
+
+Docker alternative:
+
+```bash
+claude mcp add solver-mcp -- docker run -i --rm solver-mcp:0.1.0
 ```
 
 Then start Claude Code and ask it to use `solver-mcp` to validate and solve a spec.
@@ -55,6 +70,20 @@ Add a stdio server entry to your Claude Desktop MCP config:
 ```
 
 Restart Claude Desktop after editing the config.
+
+Docker alternative:
+
+```json
+{
+  "mcpServers": {
+    "solver-mcp": {
+      "type": "stdio",
+      "command": "docker",
+      "args": ["run", "-i", "--rm", "solver-mcp:0.1.0"]
+    }
+  }
+}
+```
 
 ## Tools
 
@@ -166,6 +195,12 @@ Run the full suite:
 
 ```bash
 ./gradlew build
+```
+
+Build the container:
+
+```bash
+docker build -t solver-mcp:0.1.0 .
 ```
 
 The tests cover expression parsing and evaluation, every assignment primitive via Timefold `ConstraintVerifier`, end-to-end N-queens and graph coloring, infeasible diagnosis, validation errors, stdout discipline, and all checked-in examples.

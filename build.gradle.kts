@@ -16,8 +16,10 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:$jacksonVersion")
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.10.2")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.1")
+    implementation("io.github.oshai:kotlin-logging-jvm:8.0.4")
 
     implementation("ai.timefold.solver:timefold-solver-core:$timefoldVersion")
+    runtimeOnly("org.slf4j:slf4j-simple:2.0.18")
 
     implementation("io.modelcontextprotocol:kotlin-sdk-server:$mcpVersion")
 
