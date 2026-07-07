@@ -4,7 +4,7 @@ plugins {
 }
 
 group = "org.solvermcp"
-version = "0.1.0"
+version = "1.0.0"
 
 val timefoldVersion = "2.2.0"
 val mcpVersion = "0.14.0"

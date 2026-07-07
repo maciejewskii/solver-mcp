@@ -22,7 +22,7 @@ LABEL org.opencontainers.image.licenses="Apache-2.0"
 
 WORKDIR /app
 RUN useradd --create-home --shell /usr/sbin/nologin solvermcp
-COPY --from=build /workspace/build/libs/solver-mcp-0.1.0-all.jar /app/solver-mcp.jar
+COPY --from=build /workspace/build/libs/solver-mcp-*-all.jar /app/solver-mcp.jar
 
 USER solvermcp
 ENTRYPOINT ["java", "-jar", "/app/solver-mcp.jar"]

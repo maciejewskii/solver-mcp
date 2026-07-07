@@ -34,7 +34,7 @@ class McpServerApp {
         System.setProperty("slf4j.internal.verbosity", "WARN")
         KotlinLoggingConfiguration.logStartupMessage = false
         val server = Server(
-            serverInfo = Implementation(name = "solver-mcp", version = "0.1.0"),
+            serverInfo = Implementation(name = "solver-mcp", version = "1.0.0"),
             options = ServerOptions(
                 capabilities = ServerCapabilities(
                     tools = ServerCapabilities.Tools(listChanged = true)

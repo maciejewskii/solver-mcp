@@ -20,7 +20,7 @@ Build the runnable fat jar:
 Run the server:
 
 ```bash
-java -jar build/libs/solver-mcp-0.1.0-all.jar
+java -jar build/libs/solver-mcp-1.0.0-all.jar
 ```
 
 For MCP clients, use the jar command above. Do not launch the MCP server through `./gradlew run`; Gradle writes progress output to stdout, and stdio MCP requires stdout to contain protocol frames only.
@@ -28,8 +28,8 @@ For MCP clients, use the jar command above. Do not launch the MCP server through
 Or build and run the Docker image:
 
 ```bash
-docker build -t solver-mcp:0.1.0 .
-docker run -i --rm solver-mcp:0.1.0
+docker build -t solver-mcp:1.0.0 .
+docker run -i --rm solver-mcp:1.0.0
 ```
 
 Docker MCP clients must keep stdin open with `-i`; the server speaks MCP over stdio.
@@ -39,13 +39,13 @@ Docker MCP clients must keep stdin open with `-i`; the server speaks MCP over st
 From this repository:
 
 ```bash
-claude mcp add solver-mcp -- java -jar /absolute/path/to/solver-mcp/build/libs/solver-mcp-0.1.0-all.jar
+claude mcp add solver-mcp -- java -jar /absolute/path/to/solver-mcp/build/libs/solver-mcp-1.0.0-all.jar
 ```
 
 Docker alternative:
 
 ```bash
-claude mcp add solver-mcp -- docker run -i --rm solver-mcp:0.1.0
+claude mcp add solver-mcp -- docker run -i --rm solver-mcp:1.0.0
 ```
 
 Then start Claude Code and ask it to use `solver-mcp` to validate and solve a spec.
@@ -62,7 +62,7 @@ Add a stdio server entry to your Claude Desktop MCP config:
       "command": "java",
       "args": [
         "-jar",
-        "/absolute/path/to/solver-mcp/build/libs/solver-mcp-0.1.0-all.jar"
+        "/absolute/path/to/solver-mcp/build/libs/solver-mcp-1.0.0-all.jar"
       ]
     }
   }
@@ -79,7 +79,7 @@ Docker alternative:
     "solver-mcp": {
       "type": "stdio",
       "command": "docker",
-      "args": ["run", "-i", "--rm", "solver-mcp:0.1.0"]
+      "args": ["run", "-i", "--rm", "solver-mcp:1.0.0"]
     }
   }
 }
@@ -200,7 +200,7 @@ Run the full suite:
 Build the container:
 
 ```bash
-docker build -t solver-mcp:0.1.0 .
+docker build -t solver-mcp:1.0.0 .
 ```
 
 The tests cover expression parsing and evaluation, every assignment primitive via Timefold `ConstraintVerifier`, end-to-end N-queens and graph coloring, infeasible diagnosis, validation errors, stdout discipline, and all checked-in examples.
