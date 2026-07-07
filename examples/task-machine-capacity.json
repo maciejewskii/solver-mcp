@@ -1,0 +1,18 @@
+{
+  "name": "machine capacities",
+  "archetype": "ASSIGNMENT",
+  "entities": [
+    { "id": "t1", "attrs": { "load": 4 } },
+    { "id": "t2", "attrs": { "load": 3 } },
+    { "id": "t3", "attrs": { "load": 2 } },
+    { "id": "t4", "attrs": { "load": 5 } }
+  ],
+  "values": [
+    { "id": "m1", "attrs": { "capacity": 7 } },
+    { "id": "m2", "attrs": { "capacity": 7 } }
+  ],
+  "constraints": [
+    { "id": "machine_capacity", "type": "group_sum", "groupBy": "value.id", "sumExpr": "entity.attrs.load", "max": 7, "level": "HARD" },
+    { "id": "balance_load", "type": "balance", "groupBy": "value.id", "expr": "entity.attrs.load", "level": "SOFT", "weight": 1 }
+  ]
+}

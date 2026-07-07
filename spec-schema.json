@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:solver-mcp:spec-schema:v0.1",
+  "title": "solver-mcp v0.1 Problem Spec",
+  "type": "object",
+  "required": ["name", "archetype", "entities", "values", "constraints"],
+  "additionalProperties": false,
+  "properties": {
+    "name": { "type": "string", "minLength": 1 },
+    "archetype": { "const": "ASSIGNMENT" },
+    "entities": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/element" }
+    },
+    "values": {
+      "type": "array",
+      "minItems": 1,
+      "items": { "$ref": "#/$defs/element" }
+    },
+    "constraints": {
+      "type": "array",
+      "items": { "$ref": "#/$defs/constraint" }
+    }
+  },
+  "$defs": {
+    "element": {
+      "type": "object",
+      "required": ["id"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "attrs": {
+          "type": "object",
+          "additionalProperties": {
+            "type": ["string", "number", "integer", "boolean", "null"]
+          },
+          "default": {}
+        }
+      }
+    },
+    "level": { "enum": ["HARD", "SOFT"] },
+    "constraint": {
+      "type": "object",
+      "required": ["id", "type"],
+      "additionalProperties": false,
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "type": {
+          "enum": ["require", "forbid", "all_different", "pair_rule", "group_count", "group_sum", "cardinality", "balance", "objective"]
+        },
+        "level": { "$ref": "#/$defs/level", "default": "HARD" },
+        "weight": { "type": "integer", "minimum": 1, "default": 1 },
+        "when": { "type": "string" },
+        "expr": { "type": "string" },
+        "direction": { "enum": ["minimize", "maximize"] },
+        "pairFilter": { "type": "string" },
+        "forbid": { "type": "string" },
+        "penalizeIf": { "type": "string" },
+        "groupBy": { "type": "string" },
+        "filter": { "type": "string" },
+        "sumExpr": { "type": "string" },
+        "min": { "type": "integer" },
+        "max": { "type": "integer" },
+        "valueFilter": { "type": "string" }
+      },
+      "allOf": [
+        { "if": { "properties": { "type": { "const": "require" } } }, "then": { "required": ["when"] } },
+        { "if": { "properties": { "type": { "const": "forbid" } } }, "then": { "required": ["when"] } },
+        { "if": { "properties": { "type": { "const": "all_different" } } }, "then": { "required": ["expr"] } },
+        {
+          "if": { "properties": { "type": { "const": "pair_rule" } } },
+          "then": { "oneOf": [{ "required": ["forbid"] }, { "required": ["penalizeIf"] }] }
+        },
+        { "if": { "properties": { "type": { "const": "group_count" } } }, "then": { "required": ["groupBy"] } },
+        { "if": { "properties": { "type": { "const": "group_sum" } } }, "then": { "required": ["groupBy", "sumExpr"] } },
+        {
+          "if": { "properties": { "type": { "enum": ["group_count", "group_sum", "cardinality"] } } },
+          "then": { "anyOf": [{ "required": ["min"] }, { "required": ["max"] }] }
+        },
+        { "if": { "properties": { "type": { "const": "balance" } } }, "then": { "required": ["groupBy"], "properties": { "level": { "const": "SOFT" } } } },
+        { "if": { "properties": { "type": { "const": "objective" } } }, "then": { "required": ["expr"], "properties": { "level": { "const": "SOFT" } } } }
+      ]
+    }
+  }
+}

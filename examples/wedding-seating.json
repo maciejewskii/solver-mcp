@@ -1,0 +1,24 @@
+{
+  "name": "wedding seating",
+  "archetype": "ASSIGNMENT",
+  "entities": [
+    { "id": "ann", "attrs": {} },
+    { "id": "bob", "attrs": {} },
+    { "id": "cam", "attrs": {} },
+    { "id": "dee", "attrs": {} }
+  ],
+  "values": [
+    { "id": "table1", "attrs": {} },
+    { "id": "table2", "attrs": {} }
+  ],
+  "constraints": [
+    { "id": "table_size", "type": "cardinality", "max": 2, "level": "HARD" },
+    {
+      "id": "incompatible_pairs",
+      "type": "pair_rule",
+      "pairFilter": "(a.id == \"ann\" && b.id == \"bob\") || (a.id == \"cam\" && b.id == \"dee\")",
+      "forbid": "a.value.id == b.value.id",
+      "level": "HARD"
+    }
+  ]
+}

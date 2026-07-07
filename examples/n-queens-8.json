@@ -1,0 +1,28 @@
+{
+  "name": "n queens 8",
+  "archetype": "ASSIGNMENT",
+  "entities": [
+    { "id": "q0", "attrs": { "row": 0 } },
+    { "id": "q1", "attrs": { "row": 1 } },
+    { "id": "q2", "attrs": { "row": 2 } },
+    { "id": "q3", "attrs": { "row": 3 } },
+    { "id": "q4", "attrs": { "row": 4 } },
+    { "id": "q5", "attrs": { "row": 5 } },
+    { "id": "q6", "attrs": { "row": 6 } },
+    { "id": "q7", "attrs": { "row": 7 } }
+  ],
+  "values": [
+    { "id": "c0", "attrs": { "col": 0 } },
+    { "id": "c1", "attrs": { "col": 1 } },
+    { "id": "c2", "attrs": { "col": 2 } },
+    { "id": "c3", "attrs": { "col": 3 } },
+    { "id": "c4", "attrs": { "col": 4 } },
+    { "id": "c5", "attrs": { "col": 5 } },
+    { "id": "c6", "attrs": { "col": 6 } },
+    { "id": "c7", "attrs": { "col": 7 } }
+  ],
+  "constraints": [
+    { "id": "one_per_column", "type": "all_different", "expr": "value.id", "level": "HARD" },
+    { "id": "diagonals", "type": "pair_rule", "forbid": "a.attrs.row + a.value.attrs.col == b.attrs.row + b.value.attrs.col || a.attrs.row - a.value.attrs.col == b.attrs.row - b.value.attrs.col", "level": "HARD" }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "name": "exam timetabling",
+  "archetype": "ASSIGNMENT",
+  "entities": [
+    { "id": "examA", "attrs": { "students": 120, "teacher": "kim" } },
+    { "id": "examB", "attrs": { "students": 80, "teacher": "lee" } },
+    { "id": "examC", "attrs": { "students": 90, "teacher": "kim" } },
+    { "id": "examD", "attrs": { "students": 30, "teacher": "pat" } }
+  ],
+  "values": [
+    { "id": "slot1_roomX", "attrs": { "day": 1, "slot": 1, "capacity": 150 } },
+    { "id": "slot1_roomY", "attrs": { "day": 1, "slot": 1, "capacity": 100 } },
+    { "id": "slot2_roomX", "attrs": { "day": 1, "slot": 2, "capacity": 150 } },
+    { "id": "slot2_roomY", "attrs": { "day": 1, "slot": 2, "capacity": 100 } }
+  ],
+  "constraints": [
+    { "id": "capacity", "type": "require", "when": "entity.attrs.students <= value.attrs.capacity", "level": "HARD" },
+    {
+      "id": "teacher_clash",
+      "type": "pair_rule",
+      "pairFilter": "a.attrs.teacher == b.attrs.teacher",
+      "forbid": "a.value.attrs.day == b.value.attrs.day && a.value.attrs.slot == b.value.attrs.slot",
+      "level": "HARD"
+    },
+    { "id": "spread_days", "type": "balance", "groupBy": "value.attrs.slot", "expr": "1", "level": "SOFT", "weight": 1 }
+  ]
+}

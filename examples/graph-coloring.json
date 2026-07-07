@@ -1,0 +1,23 @@
+{
+  "name": "triangle 3 coloring",
+  "archetype": "ASSIGNMENT",
+  "entities": [
+    { "id": "A", "attrs": {} },
+    { "id": "B", "attrs": {} },
+    { "id": "C", "attrs": {} }
+  ],
+  "values": [
+    { "id": "red", "attrs": {} },
+    { "id": "green", "attrs": {} },
+    { "id": "blue", "attrs": {} }
+  ],
+  "constraints": [
+    {
+      "id": "edges",
+      "type": "pair_rule",
+      "pairFilter": "(a.id == \"A\" && b.id == \"B\") || (a.id == \"A\" && b.id == \"C\") || (a.id == \"B\" && b.id == \"C\")",
+      "forbid": "a.value.id == b.value.id",
+      "level": "HARD"
+    }
+  ]
+}
